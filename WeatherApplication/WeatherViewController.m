@@ -42,10 +42,12 @@
 -(void)getWeather
 {
     
-   // NSString *webServiceURLString = @"http://api.openweathermap.org/data/2.5/forecast/daily?id=524901&cnt=14&APPID=xxxxx";
+   // NSString *webServiceURLString = [@"http://api.openweathermap.org/data/2.5/forecast/daily?id=524901&cnt=14&APPID=xxxxx"];
     
     NSString * webServiceURLString =  [NSString stringWithFormat: @"http://api.openweathermap.org/data/2.5/forecast/daily?id=524901&cnt=14&APPID=xxxxx",self.city];
+    
     webServiceURLString = [webServiceURLString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
     NSLog(@"%@ ",webServiceURLString);
     
     NSURLRequest * request = [NSURLRequest requestWithURL:[NSURL URLWithString:webServiceURLString]];
@@ -97,8 +99,8 @@
     
     NSDictionary * item = self.resultArray[indexPath.row];
     
-    NSNumber * temp = item[@"main"][@"temp"];
-    float tempCelc = temp.floatValue / 33.8 ;
+    NSNumber * temp = item[@"0"][@"temp"][@"day"];
+    float tempCelc = temp.floatValue ;
     
     NSString * desc = item[@"weather"][0][@"description"];
     NSNumber * dt = item[@"dt"];
